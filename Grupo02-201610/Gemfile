@@ -51,6 +51,10 @@ gem 'aws-sdk-rails'
 
 gem 'dynamoid'
 
+gem 'pg'
+
+gem 'rails_12factor', group: :production
+
 # MemCach
 gem 'dalli'
 
