@@ -14,10 +14,12 @@
 #  password: contrasenia.27
 #  host: localhost
 
-default: &default
+development:
   adapter: postgresql
   encoding: unicode
-  database: design_match_db
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
+  database: design_match_db
+  username: johnathan
+  password: contrasenia.27
+  host: localhost
+  port: 5432
