@@ -41,4 +41,13 @@ Rails.application.configure do
   # CACHE
   # config.cache_store = :dalli_store, 'memcache.5crahg.0001.usw2.cache.amazonaws.com',  { :namespace => 'sessions', :expires_in => 30.minute, :key => '_DesarrolloCloud1_session' }
 
+  # HEROKU memcache
+  config.cache_store = :dalli_store,
+                  (ENV["MEMCACHIER_SERVERS"] || "").split(","),
+                  {:username => ENV["MEMCACHIER_USERNAME"],
+                   :password => ENV["MEMCACHIER_PASSWORD"],
+                   :failover => true,
+                   :socket_timeout => 1.5,
+                   :socket_failure_delay => 0.2
+                  }
 end

@@ -22,6 +22,17 @@ module DesarrolloCloud1
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.cache_store = :dalli_store, 'memcache.5crahg.0001.usw2.cache.amazonaws.com',  { :namespace => 'sessions', :expires_in => 30.minute, :key => '_DesarrolloCloud1_session' }
+    #config.cache_store = :dalli_store, 'memcache.5crahg.0001.usw2.cache.amazonaws.com',  { :namespace => 'sessions', :expires_in => 30.minute, :key => '_DesarrolloCloud1_session' }
+
+    # HEROKU memcache
+    config.cache_store = :dalli_store,
+                    (ENV["MEMCACHIER_SERVERS"] || "").split(","),
+                    {:username => ENV["MEMCACHIER_USERNAME"],
+                     :password => ENV["MEMCACHIER_PASSWORD"],
+                     :failover => true,
+                     :socket_timeout => 1.5,
+                     :socket_failure_delay => 0.2
+                    }
+
   end
 end

@@ -56,8 +56,14 @@ gem 'pg'
 
 gem 'rails_12factor', group: :production
 
-# MemCach
+# ==========
+# MemCachier
+# ==========
+# We recommend kgio for better performance.
+gem 'kgio'
+gem 'memcachier'
 gem 'dalli'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
