@@ -28,7 +28,7 @@ class SenderMail < ApplicationMailer
       mail.deliver
   end
 
-  def enviarHeroku()
+  def enviarHeroku(correo, nombre, fecha)
 
     Mail.defaults do
       delivery_method :smtp, {
@@ -43,10 +43,10 @@ class SenderMail < ApplicationMailer
     end
 
     Mail.deliver do
-      to 'js.salamanca1967@uniandes.edu.co'
+      to "#{correo}"
       from 'designmatch2@gmail.com'
-      subject 'testing send mail'
-      body 'Sending email with Ruby through SendGrid!'
+      subject "Tu disenio esta listo"
+      body "<h1>Hola #{nombre}</h1><br><p>Tu disenio, creado el #{fecha} para el proyecto ya esta disponible.</p>"
     end
 
 

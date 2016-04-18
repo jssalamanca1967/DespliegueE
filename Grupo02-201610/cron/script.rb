@@ -83,32 +83,34 @@ poller.poll do |resp|
   @disenio = Diseniody.find(iddiseniador)
   @disenio.estado = "Disponible"
   @disenio.save
-  
+
 #SenderMail.enviar(@disenio).deliver_now
 
-  ses = Aws::SES::Client.new(
-      region: 'us-west-2',
-      access_key_id: ENV['AWSAccessKeyId'],
-      secret_access_key: ENV['AWSSecretKey']
-  )
+  SenderMail.enviarHeroku(correo, nombre, fecha).deliver_now
 
-  resp2 = ses.send_email({
-      source: "designmatch@outlook.com", # required
-      destination: { # required
-          to_addresses: ["#{correo}", "js.salamanca1967@uniandes.edu.co"],
-      },
-      message: { # required
-          subject: { # required
-              data: "Tu disenio esta listo",
-          },
-          body: { # required
-              text: {
-                  data: "Leeeeel",
-              },
-              html: {
-                  data: "<h1>Hola #{nombre}</h1><br><p>Tu disenio, creado el #{fecha} para el proyecto ya esta disponible.</p>",
-              },
-          },
-      },
-  })
+  # ses = Aws::SES::Client.new(
+  #     region: 'us-west-2',
+  #     access_key_id: ENV['AWSAccessKeyId'],
+  #     secret_access_key: ENV['AWSSecretKey']
+  # )
+  #
+  # resp2 = ses.send_email({
+  #     source: "designmatch@outlook.com", # required
+  #     destination: { # required
+  #         to_addresses: ["#{correo}", "js.salamanca1967@uniandes.edu.co"],
+  #     },
+  #     message: { # required
+  #         subject: { # required
+  #             data: "Tu disenio esta listo",
+  #         },
+  #         body: { # required
+  #             text: {
+  #                 data: "Leeeeel",
+  #             },
+  #             html: {
+  #                 data: "<h1>Hola #{nombre}</h1><br><p>Tu disenio, creado el #{fecha} para el proyecto ya esta disponible.</p>",
+  #             },
+  #         },
+  #     },
+  # })
 end
