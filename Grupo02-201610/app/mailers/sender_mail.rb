@@ -28,6 +28,30 @@ class SenderMail < ApplicationMailer
       mail.deliver
   end
 
+  def enviarHeroku()
+
+    Mail.defaults do
+      delivery_method :smtp, {
+        :address => 'smtp.sendgrid.net',
+        :port => '587',
+        :domain => 'heroku.com',
+        :user_name => ENV['SENDGRID_USERNAME'],
+        :password => ENV['SENDGRID_PASSWORD'],
+        :authentication => :plain,
+        :enable_starttls_auto => true
+      }
+    end
+
+    Mail.deliver do
+      to 'js.salamanca1967@uniandes.edu.co'
+      from 'designmatch2@gmail.com'
+      subject 'testing send mail'
+      body 'Sending email with Ruby through SendGrid!'
+    end
+
+
+  end
+
   def prueba
     options = { :address              => "smtp.gmail.com",
                 :port                 => 587,

@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    
+
     @empresaEjm = Empresady.new(:nombre_empresa => "EmpresaEjemplo")
     @empresaEjm.save
     @proyectoEjm = @empresaEjm.proyectos.create(:nombre => "ProyectoEjm")
@@ -31,9 +31,6 @@ class PagesController < ApplicationController
 
   def about
 
-    u = User.new(:name => 'Josh')
-    u.email = 'josh@joshsymonds.com'
-    u.hash = 'asdf'
-    u.save
+    SenderMail.enviarHeroku()
   end
 end
